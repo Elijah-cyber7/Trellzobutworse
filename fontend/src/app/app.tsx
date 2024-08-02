@@ -1,8 +1,30 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styles from './app.module.css';
+import './app.css';
+import React from 'react';
+
+import {GymRecord} from '../entities/GymRecord';
 
 import VerticalContainer from '../vertical-container/VerticalContainer';
 export function App() {
+    const [records, setRecords] = React.useState<GymRecord[]>([]);
+
+    React.useEffect(() =>{
+        fetch("http://localhost:8080/gym/records",{
+        method: "GET"
+        }).then(response => {
+            if(response.status == 200){
+            return response.json();
+            }
+        return null;
+
+        }).then(data =>{
+            if (data !== null ){
+                setRecords(data);
+                }
+
+                })
+         },   []);
   return (
     <div className="main-component">
         <div>
