@@ -6,6 +6,12 @@ import React from 'react';
 import {GymRecord} from '../entities/GymRecord';
 
 import VerticalContainer from '../vertical-container/VerticalContainer';
+
+import ReadContentBox from "../content-box/ReadContentBox";
+
+
+
+
 export function App() {
     const [records, setRecords] = React.useState<GymRecord[]>([]);
 
@@ -41,6 +47,11 @@ export function App() {
                           {
                               <div>
                                  <h2>Read</h2>
+                                  {
+                                      records.map(record => <ReadContentBox
+                                          key={`${record.id}`}
+                                          content={record}/>)
+                                  }
                                </div>
                           }
                       </VerticalContainer>
