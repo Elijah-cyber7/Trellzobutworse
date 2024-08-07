@@ -1,6 +1,7 @@
 package com.trellobutworse.TrelloButWorse.services;
 
 import com.trellobutworse.TrelloButWorse.dtos.GymRecordDto;
+import com.trellobutworse.TrelloButWorse.entities.GymRecord;
 import com.trellobutworse.TrelloButWorse.repositories.GymRecordsRepository;
 import lombok.RequiredArgsConstructor;
 import mappers.GymRecordMapper;
@@ -20,5 +21,13 @@ public class RecordsService {
 
     public List<GymRecordDto> allRecords() {
        return  gymRecordMapper.toGymRecordDtos(gymRecordsRepository.findAll());
+    }
+
+    public GymRecordDto createGymRecord(GymRecordDto gymRecordDto) {
+        GymRecord gymRecord = gymRecordMapper.toGymRecord(gymRecordDto);
+
+        GymRecord createdGymRecord = gymRecordsRepository.save(gymRecord);
+
+        return gymRecordMapper.toGymRecordDto(createdGymRecord);
     }
 }

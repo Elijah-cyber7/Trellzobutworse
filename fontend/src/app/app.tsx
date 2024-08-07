@@ -9,7 +9,8 @@ import VerticalContainer from '../vertical-container/VerticalContainer';
 
 import ReadContentBox from "../content-box/ReadContentBox";
 
-
+import createContentBox from "../content-box/CreateContentBox";
+import CreateContentBox from "../content-box/CreateContentBox";
 
 
 export function App() {
@@ -31,6 +32,23 @@ export function App() {
 
                 })
          },   []);
+
+         const handleCreateSubmit = (exercise: string, weight: number) => {
+             fetch("http://localhost:8080/gym/records", {
+                 method: "POST",
+                 headers: {"content-type": "application/json"},
+                 body: JSON.stringify({exercise: exercise, weight: weight})
+             }).then(response => {
+                 if (response.status == 201){
+                     return response.json();
+                 }
+                 return null;
+             }).then(data =>{
+                 if (data !== null ){
+                     setRecords([...records, data]);
+                 }
+             })
+         }
   return (
     <div className="main-component">
         <div>
@@ -38,6 +56,7 @@ export function App() {
         {
                  <div>
                      <h2>Create</h2>
+                     <CreateContentBox onSubmit={handleCreateSubmit}/>
                  </div>
         }
         </VerticalContainer>
