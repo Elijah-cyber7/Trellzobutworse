@@ -8,13 +8,13 @@ interface ContentBoxProps{
 }
 
 const ReadContentBox: React.FC<ContentBoxProps> = ( { content }) => {
-          const [record, setRecord] = React.useState<GymRecord>();
+          const [record, setRecord] = React.useState<GymRecord>(content);
 
 
           return (
               <div className="content-box">
-                  <p>Exercise: {record?.exercise} </p>
-                  <p>Weight: {record?.weight} kg</p>
+                  <p>Exercise: {record.exercise} </p>
+                  <p>Weight: {record.weight} kg</p>
               </div>
           )
 
