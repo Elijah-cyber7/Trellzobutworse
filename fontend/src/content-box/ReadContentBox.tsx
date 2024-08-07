@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {GymRecord} from "../entities/GymRecord";
+import './ContentBox.css';
 
 
 interface ContentBoxProps{
